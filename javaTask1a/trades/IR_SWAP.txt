@@ -1,0 +1,7 @@
+Trade: {
+
+    type: {IR_SWAP},
+
+    price: {72.22}
+
+}
