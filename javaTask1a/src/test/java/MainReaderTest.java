@@ -1,3 +1,4 @@
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import org.junit.Test;
 import reader.MainReader;
 import static org.junit.Assert.*;
@@ -17,14 +18,14 @@ public class MainReaderTest {
         assertEquals(irSwap.getPriceValue(), 72.22, 0.001);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void assertNotInstance(){
-        // -1
+        MainReader.getInstanceTransaction("./trades/INVALID.txt");
     }
 
-    @Test
+    @Test(expected = ValueException.class)
     public void assertCorrectInstance(){
-        // get right instance
+        MainReader.getInstanceTransaction("./trades/VALUE_INVALID.txt");
     }
 
 

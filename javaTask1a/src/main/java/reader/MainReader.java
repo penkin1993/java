@@ -60,7 +60,7 @@ public class MainReader {
                 transactionType = new IrSwap(transaction.getPrice());
                 return transactionType;
         }
-        throw new ValueException("Type is not found");
+        throw new IllegalArgumentException("Type is not found");
     }
 
     private static Transaction getData(String fileName){
