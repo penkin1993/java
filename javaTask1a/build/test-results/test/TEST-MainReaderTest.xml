@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-17T23:15:27" hostname="MacBook-Pro-GP.local" time="0.001">
+<testsuite name="MainReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-18T00:23:41" hostname="MacBook-Pro-GP.local" time="0.001">
   <properties/>
-  <testcase name="assertNotInstance" classname="MainReaderTest" time="0.001"/>
+  <testcase name="assertEqualPrice" classname="MainReaderTest" time="0.001"/>
   <system-out><![CDATA[Bond(10.2)
 CommoditySpot(14.2)
 FxSpot(100.23)

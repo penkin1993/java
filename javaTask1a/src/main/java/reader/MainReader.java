@@ -29,7 +29,7 @@ class Transaction {
 
 public class MainReader {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){ // throws IOException{
         Object transactionType;
         String filename = args[0];
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -59,8 +59,11 @@ public class MainReader {
                 System.out.println("IrSwap(" + transaction.getPrice() + ")");
                 transactionType = new IrSwap(transaction.getPrice());
                 return transactionType;
+            default: {
+                throw new IllegalArgumentException("Type is not found");
+            }
         }
-        throw new IllegalArgumentException("Type is not found");
+
     }
 
     private static Transaction getData(String fileName){
