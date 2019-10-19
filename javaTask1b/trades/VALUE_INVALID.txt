@@ -1,7 +1,0 @@
-Trade: {
-
-    tsype: {VALUE_INVALID},
-
-    price: {10.20}
-
-}

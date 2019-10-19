@@ -1,7 +1,0 @@
-Trade: {
-
-    type: {BOND},
-
-    price: {10.20}
-
-}

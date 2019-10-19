@@ -1,7 +1,0 @@
-Trade: {
-
-    type: {INVALID},
-
-    price: {10.20}
-
-}
