@@ -63,8 +63,8 @@ public class MainReader {
                 throw new IllegalArgumentException("Type is not found");
             }
         }
-
     }
+
 
     private static Transaction getData(String fileName){
         BufferedReader reader;
@@ -93,7 +93,6 @@ public class MainReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         if ((type == null) || (price == -1)){
             throw new ValueException("Type or price are not define");
         }

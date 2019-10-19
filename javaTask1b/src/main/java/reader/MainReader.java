@@ -38,7 +38,7 @@ public class MainReader {
         transactionType = getInstanceTransaction(filename);
     }
 
-    public static TradeInterface getInstanceTransaction(String filename){
+    public static TradeInterface getInstanceTransaction(String filename){ // TODO  в отдельный класс, // наследуемый от отдного интерфйса
         // TradeInterface transactionType;
         Transaction transaction = getData(filename);
         return TradeType.valueOf(transaction.getType()).createTrade(transaction.getPrice());
@@ -47,27 +47,31 @@ public class MainReader {
     private static Transaction getData(String fileName){
         BufferedReader reader;
         String substr;
-        Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
+        Pattern pattern = Pattern.compile("\\{(.*?)\\}");
         float price = -1;
         String type = null;
         try {
             reader = new BufferedReader(new FileReader(fileName));
-            String line = reader.readLine();
-            while (line != null) {
-                Matcher m = PATTERN.matcher(line);
-                if (m.find()){
-                    substr = m.group(0);
-                    substr = substr.substring(1, substr.length() - 1);
-                    if(line.contains("price")){
-                        price = Float.parseFloat(substr);
+            try {
+                String line = reader.readLine();
+                while (line != null) {
+                    Matcher m = pattern.matcher(line);
+                    if (m.find()) {
+                        substr = m.group(0);
+                        substr = substr.substring(1, substr.length() - 1);
+                        if (line.contains("price")) {
+                            price = Float.parseFloat(substr);
+                        }
+                        if (line.contains("type")) {
+                            type = substr;
+                        }
                     }
-                    if(line.contains("type")){
-                        type = substr;
-                    }
-                }
-                line = reader.readLine();
+                    line = reader.readLine();
+                } // TODO finally close // line = reader.readLine();
             }
-            reader.close();
+            finally {
+                reader.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
