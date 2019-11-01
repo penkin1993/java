@@ -3,7 +3,7 @@ package reader;
 import reader.classes.*;
 
 
-public class CreateWithIf implements CreateWith{
+public class CreateWithIf implements CreateWith {
     @Override
     public TradeInterface getData(Transaction transaction) {
         switch (transaction.getType()) {

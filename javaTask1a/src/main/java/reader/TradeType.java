@@ -27,5 +27,6 @@ public enum TradeType {
             return new IrSwap(price);
         }
     };
+
     public abstract TradeInterface createTrade(float price);
 }

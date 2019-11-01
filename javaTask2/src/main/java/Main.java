@@ -7,6 +7,14 @@ public class Main {
 
         hashMap.put("Russia", 1991);
         hashMap.put("Korea", 1992);
+
+        //hashMap.remove("Russia");
+        //hashMap.remove("Korea");
+
+        System.out.println(hashMap.get("Russia"));
+
+        hashMap.put("Russia", 1991);
+        hashMap.put("Korea", 1992);
         hashMap.put("USA", 1993);
         hashMap.put("Canada", 1994);
         hashMap.put("Russia1", 1999);
@@ -43,6 +51,5 @@ public class Main {
         }
 
         System.out.println(hashMap.size());
-
     }
 }

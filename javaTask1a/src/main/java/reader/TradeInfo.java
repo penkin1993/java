@@ -10,14 +10,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TradeInfo {
-    public static TradeInterface getInstanceTransaction(String filename){
+    public static TradeInterface getInstanceTransaction(String filename) {
         CreateWith tradeDtype;
         Transaction transaction = getData(filename);
         tradeDtype = new CreateWithEnum();
         return tradeDtype.getData(transaction);
     }
 
-    private static Transaction getData(String fileName){
+    private static Transaction getData(String fileName) {
         BufferedReader reader;
         String substr;
         Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
@@ -28,13 +28,13 @@ public class TradeInfo {
             String line = reader.readLine();
             while (line != null) {
                 Matcher m = PATTERN.matcher(line);
-                if (m.find()){
+                if (m.find()) {
                     substr = m.group(0);
                     substr = substr.substring(1, substr.length() - 1);
-                    if(line.contains("price")){
+                    if (line.contains("price")) {
                         price = Float.parseFloat(substr);
                     }
-                    if(line.contains("type")){
+                    if (line.contains("type")) {
                         type = substr;
                     }
                 }
@@ -44,10 +44,9 @@ public class TradeInfo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if ((type == null) || (price == -1)){
+        if ((type == null) || (price == -1)) {
             throw new ValueException("Type or price are not define");
-        }
-        else{
+        } else {
             return new Transaction(price, type);
         }
     }

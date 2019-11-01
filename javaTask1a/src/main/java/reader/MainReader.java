@@ -2,6 +2,7 @@ package reader;
 
 import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import reader.classes.*;
+
 import java.util.StringTokenizer;
 
 import java.util.regex.*;
@@ -12,7 +13,7 @@ class Transaction {
     private float price;
     private String type;
 
-    Transaction(float price, String type){
+    Transaction(float price, String type) {
         this.price = price;
         this.type = type;
     }
@@ -29,7 +30,7 @@ class Transaction {
 
 public class MainReader {
 
-    public static void main(String[] args)throws IOException{
+    public static void main(String[] args) throws IOException {
         Object transactionType;
         //String filename = args[0];
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
