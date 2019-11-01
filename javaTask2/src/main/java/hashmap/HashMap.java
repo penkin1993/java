@@ -9,10 +9,11 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
     private ArrayList<Optional<Node<K, V>>> hashList = NewHashListInit(16);
 
     // TODO: Переписать через иттератор ????
+    // TODO: Добавить тесты
 
 
     private ArrayList<Optional<Node<K, V>>>  NewHashListInit(int capacity){
-        ArrayList<Optional<Node<K, V>>> newHashList = new ArrayList<>();
+        ArrayList<Optional<Node<K, V>>> newHashList = new ArrayList<>(capacity);
         for (int i = 0; i < capacity; i++) {
             newHashList.add(null);
         }
@@ -20,14 +21,14 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
         return newHashList;
     }
 
-
     private void expandList() {
         Node<K,V> node;
-        if (this.size >= 0.75 * capacity) {
+
+        if ((float)this.size >= 0.75 * capacity) {
             this.size = 0;
             ArrayList oldHashList = new ArrayList<>(this.hashList);
             this.hashList = NewHashListInit(2*capacity); // capacity изменилось
-            for (int i = 0; i < hashList.size(); i++) {
+            for (int i = 0; i < oldHashList.size(); i++) {
                 NodeIterator nodeIterator = new NodeIterator(oldHashList, i);
                 while (nodeIterator.hasNext()){
                     node = nodeIterator.next();
@@ -45,12 +46,9 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
         }
         else{
             expandList();
-            int index = getIndex(key, this.capacity);
-            Node node = hashList.get(index).orElse(null);
-            if (node == null){
-                hashList.set(index, Optional.of(new Node<>(key, value)));
-            }
-            else {
+            int index = getIndex(key);
+            try {
+                Node node = hashList.get(index).orElse(null);
                 while (true) {
                     if (node.getNextNode() == null) {
                         node.setNextNode(new Node<>(key, value));
@@ -61,31 +59,36 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
                     }
                 }
             }
+            catch (NullPointerException e){
+                hashList.set(index, Optional.of(new Node<>(key, value)));
+            }
             this.size += 1;
         }
     }
 
-    private int getIndex(K key, int capacity){
+    private int getIndex(K key){
         int hash = key.hashCode();
-        return Math.abs(hash) % capacity;
+        return Math.abs(hash) % this.capacity;
     }
 
     private Node getNode(K key){
-        int index = getIndex(key, this.capacity);
-        Node node = hashList.get(index).orElse(null);
-        if (node == null){
-            throw new NoSuchElementException("The remove element does not exist");
+        int index = getIndex(key);
+        try{
+            Node node = hashList.get(index).orElse(null);
+            while (true){
+                if (node.getKey().equals(key)){
+                    return node;
+                }
+                else if (node.getNextNode() == null){
+                    throw new NoSuchElementException("The key does not exist");
+                }
+                else {
+                    node = node.getNextNode();
+                }
+            }
         }
-        while (true){
-            if (node.getKey().equals(key)){
-                return node;
-            }
-            else if (node.getNextNode() == null){
-                throw new NoSuchElementException("The key does not exist");
-            }
-            else {
-                node = node.getNextNode();
-            }
+        catch (NullPointerException e){
+            throw new NoSuchElementException("The remove element does not exist");
         }
     }
 
@@ -112,7 +115,7 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
 
     @Override
     public V remove(K key){
-        int index = getIndex(key, this.capacity);
+        int index = getIndex(key);
         Node<K, V> node = hashList.get(index).orElse(null);
         if (node == null){
             //throw new NoSuchElementException("The remove element does not exist");
@@ -120,10 +123,9 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
         }
         Node<K, V> nextNode;
         if (node.getKey().equals(key)){
-            nextNode = node.getNextNode();
-            hashList.set(index, Optional.of(node.getNextNode()));
+            hashList.set(index, null);
             this.size -= 1;
-            return nextNode.getValue();
+            return node.getValue();
         }
         else while (true){
             nextNode = node.getNextNode();
@@ -208,18 +210,22 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
         Node<K, V> currentNode;
         ArrayList<Optional<Node<K, V>>> hashList;
 
-
         // initialize pointer to head of the list for iteration
         NodeIterator(ArrayList<Optional<Node<K, V>>> hashList, int index)
         {
             this.hashList = hashList;
-            this.currentNode = hashList.get(index).orElse(null);
+            try {
+                this.currentNode = hashList.get(index).orElse(null);
+            }
+            catch (NullPointerException e){
+                this.currentNode = null;
+            }
         }
 
         // returns false if next element does not exist
         public boolean hasNext()
         {
-            return currentNode.getNextNode() != null;
+            return currentNode != null;
         }
 
         // return current data and update pointer
@@ -230,5 +236,4 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
             return node;
         }
     }
-
 }
