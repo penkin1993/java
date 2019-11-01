@@ -1,22 +1,41 @@
 package hashmap;
 
-import javax.swing.text.html.Option;
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
+
 
 public class HashMap<K, V> implements SimpleMap<K, V>{
-    private ArrayList<Optional<Node<K, V>>> hashList = new ArrayList<>(); // список с элементами
-    private int capacity = 0; // вместимость массива
+    private int capacity = 16; // вместимость массива
     private int size = 0;
+    private ArrayList<Optional<Node<K, V>>> hashList = NewHashListInit(16);
 
-    // TODO реализовать увеличение
-    //  и уменьшение (автоматически ???) словаря. Прослдеить за ключами !!!
-    // по дефолту заполнять null новый массив
+    // TODO: Переписать через иттератор ????
 
 
+    private ArrayList<Optional<Node<K, V>>>  NewHashListInit(int capacity){
+        ArrayList<Optional<Node<K, V>>> newHashList = new ArrayList<>();
+        for (int i = 0; i < capacity; i++) {
+            newHashList.add(null);
+        }
+        this.capacity = capacity;
+        return newHashList;
+    }
+
+
+    private void expandList() {
+        Node<K,V> node;
+        if (this.size >= 0.75 * capacity) {
+            this.size = 0;
+            ArrayList oldHashList = new ArrayList<>(this.hashList);
+            this.hashList = NewHashListInit(2*capacity); // capacity изменилось
+            for (int i = 0; i < hashList.size(); i++) {
+                NodeIterator nodeIterator = new NodeIterator(oldHashList, i);
+                while (nodeIterator.hasNext()){
+                    node = nodeIterator.next();
+                    put(node.getKey(), node.getValue());
+                }
+            }
+        }
+    }
 
     @Override
     public void put(K key, V value){
@@ -25,11 +44,8 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
             node.setValue(value);
         }
         else{
-            // TODO: Проверка на расширение !!!
-            // Расширили
-
-
-            int index = getIndex(key);  // TODO: Извлечь последний элемент данного ключа !!!
+            expandList();
+            int index = getIndex(key, this.capacity);
             Node node = hashList.get(index).orElse(null);
             if (node == null){
                 hashList.set(index, Optional.of(new Node<>(key, value)));
@@ -49,13 +65,13 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
         }
     }
 
-    private int getIndex(K key){
+    private int getIndex(K key, int capacity){
         int hash = key.hashCode();
         return Math.abs(hash) % capacity;
     }
 
     private Node getNode(K key){
-        int index = getIndex(key);
+        int index = getIndex(key, this.capacity);
         Node node = hashList.get(index).orElse(null);
         if (node == null){
             throw new NoSuchElementException("The remove element does not exist");
@@ -96,33 +112,27 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
 
     @Override
     public V remove(K key){
-        int index = getIndex(key);
+        int index = getIndex(key, this.capacity);
         Node<K, V> node = hashList.get(index).orElse(null);
         if (node == null){
-            throw new NoSuchElementException("The remove element does not exist");
+            //throw new NoSuchElementException("The remove element does not exist");
+            return null;
         }
         Node<K, V> nextNode;
         if (node.getKey().equals(key)){
             nextNode = node.getNextNode();
             hashList.set(index, Optional.of(node.getNextNode()));
-
-            // TODO: Сжимать, если указывает на null ???
-            // Проверка на сжатие
-
             this.size -= 1;
             return nextNode.getValue();
         }
         else while (true){
             nextNode = node.getNextNode();
             if (nextNode == null){
-                throw new NoSuchElementException("The remove element does not exist");
+                //throw new NoSuchElementException("The remove element does not exist");
+                return null;
             }
             else if (nextNode.getKey().equals(key)){
                 node.setNextNode(nextNode.getNextNode());
-
-                // TODO: Сжимать, если указывает на null ???
-                // Проверка на сжатие
-
                 this.size -= 1;
                 return nextNode.getValue();
             }
@@ -134,14 +144,27 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
 
     @Override
     public Set<K> keySet() {
-        return null;
+        HashSet<K> set = new HashSet<>();
+        for (int i = 0; i < hashList.size(); i++) {
+            NodeIterator nodeIterator = new NodeIterator(this.hashList, i);
+            while (nodeIterator.hasNext()) {
+                set.add(nodeIterator.next().getKey());
+            }
+        }
+        return set;
     }
 
     @Override
     public Collection<V> values() {
-        return null;
+        ArrayList<V> collection = new ArrayList<>();
+        for (int i = 0; i < hashList.size(); i++) {
+            NodeIterator nodeIterator = new NodeIterator(this.hashList, i);
+            while (nodeIterator.hasNext()) {
+                collection.add(nodeIterator.next().getValue());
+            }
+        }
+        return collection;
     }
-
 
     @Override
     public int size(){
@@ -179,6 +202,33 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
             return this.next;
         }
 
+    }
+
+    class NodeIterator implements Iterator {
+        Node<K, V> currentNode;
+        ArrayList<Optional<Node<K, V>>> hashList;
+
+
+        // initialize pointer to head of the list for iteration
+        NodeIterator(ArrayList<Optional<Node<K, V>>> hashList, int index)
+        {
+            this.hashList = hashList;
+            this.currentNode = hashList.get(index).orElse(null);
+        }
+
+        // returns false if next element does not exist
+        public boolean hasNext()
+        {
+            return currentNode.getNextNode() != null;
+        }
+
+        // return current data and update pointer
+        public Node<K, V> next()
+        {
+            Node<K, V> node = currentNode;
+            currentNode = currentNode.getNextNode();
+            return node;
+        }
     }
 
 }
