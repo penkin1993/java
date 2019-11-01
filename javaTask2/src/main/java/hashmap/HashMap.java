@@ -7,9 +7,8 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
     private int capacity = 16; // вместимость массива
     private int size = 0;
     private ArrayList<Optional<Node<K, V>>> hashList = NewHashListInit(16);
-
-    // TODO: Переписать через иттератор ????
     // TODO: Добавить тесты
+
 
 
     private ArrayList<Optional<Node<K, V>>>  NewHashListInit(int capacity){
@@ -73,23 +72,15 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
 
     private Node getNode(K key){
         int index = getIndex(key);
-        try{
-            Node node = hashList.get(index).orElse(null);
-            while (true){
-                if (node.getKey().equals(key)){
-                    return node;
-                }
-                else if (node.getNextNode() == null){
-                    throw new NoSuchElementException("The key does not exist");
-                }
-                else {
-                    node = node.getNextNode();
-                }
+        Node<K, V> node;
+        NodeIterator nodeIterator = new NodeIterator(this.hashList, index);
+        while (nodeIterator.hasNext()) {
+            node = nodeIterator.next();
+            if (node.equals(key)){
+                return node;
             }
         }
-        catch (NullPointerException e){
-            throw new NoSuchElementException("The remove element does not exist");
-        }
+        throw new NoSuchElementException("The key does not exist");
     }
 
     @Override
@@ -98,7 +89,8 @@ public class HashMap<K, V> implements SimpleMap<K, V>{
             Node<K, V> node = getNode(key);
             return node.getValue();
         } catch (NoSuchElementException e){
-            throw new NoSuchElementException("The key does not exist");
+            return null;
+            //throw new NoSuchElementException("The key does not exist");
         }
     }
 
