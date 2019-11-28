@@ -2,121 +2,45 @@ package classes.serClasses;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.Iterator;
 
 
 public class SerClassType {
+    private final SerClassInterface serObj;
 
-    private String appendFront(int span, String name, boolean newRow) {
-        StringBuilder string = new StringBuilder();
-        if (!newRow) {
-            string.append(new String(new char[span]).replace("\0", "    "));
-        }
-        string.append("<");
-        string.append(name);
-        string.append(">");
-        if (newRow) {
-            string.append("\n");
-        }
-        return string.toString();
+    public SerClassType(SerClassInterface serObj) {
+        this.serObj = serObj;
     }
 
-
-    private String appendBack(int span, String name, boolean newRow) {
-        StringBuilder string = new StringBuilder();
-        if (newRow) {
-            string.append(new String(new char[span]).replace("\0", "    "));
-        }
-        string.append("</");
-        string.append(name);
-        string.append(">");
-        if (!newRow) {
-            string.append("\n");
-        }
-
-        return string.toString();
-    }
-
-
-    public String run(int span, Object o){
+    public String run(int span, Object o) {
         StringBuilder serString = new StringBuilder();
+        if (PrimitiveCheck.isWrapperType(o.getClass())) { // примитив
+            return serString.append(serObj.primitiveHandler(o)).toString();
 
-        if (PrimitiveCheck.isWrapperType(o.getClass())){ // примитив
-            serString.append(o.toString());
-            return serString.toString();
-        }
-        else if (o instanceof Collection){ // массив или коллекция
-            serString.append("\n");
-            span++;
-
-            Iterator iter = ((Collection) o).iterator();
-            int i = 1;
-
-            while (iter.hasNext()){
-                serString.append(appendFront(span, Integer.toString(i), false)); // имя открывающего аттрибута
-                serString.append(iter.next());
-                serString.append(appendBack(span, Integer.toString(i), false)); // имя закрывающего аттрибута
-                i++;
-            }
-            span--;
-            serString.append(new String(new char[span]).replace("\0", "    "));
-            return serString.toString();
-        }
-        else {
-            serString.append(appendFront(span, o.getClass().getName(), true));
+        } else if (o instanceof Collection) { // массив или коллекция
+            return serString.append(serObj.collectionHandler(span, o)).toString();
+        } else {
+            serString.append(serObj.appendFrontName(span, o.getClass().getName()));
             span++;
 
             Class<?> clazz = o.getClass();
             Field[] declafedFields = clazz.getDeclaredFields();
-            for (Field declaredField : declafedFields){
+            for (Field declaredField : declafedFields) {
                 declaredField.setAccessible(true);
                 try {
-                    serString.append(appendFront(span, declaredField.getName(),false)); // имя открывающего аттрибута
+                    serString.append(serObj.appendFront(span, declaredField.getName(), false)); // имя открывающего аттрибута
                     serString.append(run(span, declaredField.get(o)));
-                    serString.append(appendBack(span, declaredField.getName(), false)); // имя закрывающего аттрибута
+                    serString.append(serObj.appendBack(span, declaredField.getName(), false)); // имя закрывающего аттрибута
 
-                } catch (IllegalAccessException e){
+                } catch (IllegalAccessException e) {
                     System.out.println("IllegalAccessException");
                 }
             }
             span--;
-            serString.append(appendBack(span, o.getClass().getName(), true));
+            serString.append(serObj.appendBackName(span, o.getClass().getName()));
             return serString.toString();
+
         }
     }
 }
-
-// TODO: Переписать через паттрен !!!
-// TODO: JSON
-
-/*
-<Person>
-    <firstName>Иван<firstName>
-    <lastName>Иванов</lastName>
-    <address>
-        <city>Москва</city>
-        <postalCode>101101<postalCode>
-    </address>
-    <phoneNumbers>
-        <1>123-1234-523</1>
-        <2>432-23-232-23</2>
-    </phoneNumbers>
-</Person>
-
-{
-   "firstName": "Иван",
-   "lastName": "Иванов",
-   "address": {
-       "city": "Москва",
-       "postalCode": "101101"
-   },
-   "phoneNumbers": [ # массив или коллекция
-       "123-1234-523",
-       "432-23-232-23"
-   ]
-}
- */
-
-
 
 

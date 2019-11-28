@@ -1,6 +1,9 @@
 import java.lang.*;
 import java.util.ArrayList;
+
+import classes.serClasses.JsonSerializer;
 import classes.serClasses.SerClassType;
+import classes.serClasses.XmlSerializer;
 
 
 class Address {
@@ -22,9 +25,8 @@ public class Main {
         person.phoneNumbers.add("Russia");
         person.phoneNumbers.add("China");
         person.phoneNumbers.add("USSR");
-        //String person = "sadasdas";
 
-        SerClassType ser = new SerClassType();
+        SerClassType ser = new SerClassType(new JsonSerializer());
 
         System.out.print(ser.run(0, person));
 
