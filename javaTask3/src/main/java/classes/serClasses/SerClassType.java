@@ -2,6 +2,7 @@ package classes.serClasses;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.Iterator;
 
 
 public class SerClassType {
@@ -9,7 +10,7 @@ public class SerClassType {
     private String appendFront(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();
         if (!newRow) {
-            string.append(new String(new char[span]).replace("\0", "  "));
+            string.append(new String(new char[span]).replace("\0", "    "));
         }
         string.append("<");
         string.append(name);
@@ -24,7 +25,7 @@ public class SerClassType {
     private String appendBack(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();
         if (newRow) {
-            string.append(new String(new char[span]).replace("\0", "  "));
+            string.append(new String(new char[span]).replace("\0", "    "));
         }
         string.append("</");
         string.append(name);
@@ -44,13 +45,26 @@ public class SerClassType {
             serString.append(o.toString());
             return serString.toString();
         }
-        else if (o instanceof Collection){ // массив или коллекция // TODO
-            //serCollection(span, o.getClass().getName(), (Collection) o); // TODO
-            return serString.toString(); // TODO
+        else if (o instanceof Collection){ // массив или коллекция
+            serString.append("\n");
+            span++;
+
+            Iterator iter = ((Collection) o).iterator();
+            int i = 1;
+
+            while (iter.hasNext()){
+                serString.append(appendFront(span, Integer.toString(i), false)); // имя открывающего аттрибута
+                serString.append(iter.next());
+                serString.append(appendBack(span, Integer.toString(i), false)); // имя закрывающего аттрибута
+                i++;
+            }
+            span--;
+            serString.append(new String(new char[span]).replace("\0", "    "));
+            return serString.toString();
         }
         else {
             serString.append(appendFront(span, o.getClass().getName(), true));
-            span ++;
+            span++;
 
             Class<?> clazz = o.getClass();
             Field[] declafedFields = clazz.getDeclaredFields();
@@ -65,18 +79,14 @@ public class SerClassType {
                     System.out.println("IllegalAccessException");
                 }
             }
-            span --;
+            span--;
             serString.append(appendBack(span, o.getClass().getName(), true));
             return serString.toString();
         }
     }
 }
 
-
-
-
 // TODO: Переписать через паттрен !!!
-// TODO: проверить с collection !!!
 // TODO: JSON
 
 /*
