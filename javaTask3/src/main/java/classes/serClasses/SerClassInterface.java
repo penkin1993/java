@@ -2,8 +2,8 @@ package classes.serClasses;
 
 public interface SerClassInterface {
 
-    String appendFrontName(int span, Object o);
-    String appendBackName(int span, Object o);
+    void appendFrontName(StringBuilder serString, int span, Object o);
+    void appendBackName(StringBuilder serString, int span, Object o);
     String appendFront(int span, String name, boolean newRow);
     String appendBack(int span, String name, boolean newRow);
     String primitiveHandler(Object o);

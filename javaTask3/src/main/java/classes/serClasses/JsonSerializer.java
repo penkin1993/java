@@ -35,19 +35,16 @@ public class JsonSerializer implements SerClassInterface {
         return string.toString();
     }
 
-    public String appendFrontName(int span, Object o) {
-        StringBuilder string = new StringBuilder();
+    public void appendFrontName(StringBuilder serStringint, int span, Object o) {
         //string.append(new String(new char[span]).replace("\0", "    "));
-        string.append("{\n");
-        return string.toString();
+        serStringint.append("{\n");
     }
 
-    public String appendBackName(int span, Object o) {
-        StringBuilder string = new StringBuilder();
-        string.append(new String(new char[span]).replace("\0", "    "));
-        string.append("}");
-        //string.append("}\n");
-        return string.toString();
+    public void appendBackName(StringBuilder serStringint, int span, Object o) {
+        serStringint.delete(serStringint.length() - 3, serStringint.length());
+        serStringint.append("\n");
+        serStringint.append(new String(new char[span]).replace("\0", "    "));
+        serStringint.append("}");
     }
 
     public String primitiveHandler(Object o) {
@@ -67,7 +64,7 @@ public class JsonSerializer implements SerClassInterface {
             serString.append("\""); // имя открывающего аттрибута
             serString.append(iter.next());
             serString.append("\"");
-            if (iter.hasNext()){
+            if (iter.hasNext()) {
                 serString.append(",");
             }
             serString.append("\n"); // имя закрывающего аттрибута

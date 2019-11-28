@@ -36,12 +36,12 @@ public class XmlSerializer implements SerClassInterface {
         return string.toString();
     }
 
-    public String appendFrontName(int span, Object o){
-        return appendFront(span, o.toString(), true);
+    public void appendFrontName(StringBuilder serStringint, int span, Object o){
+        serStringint.append(appendFront(span, o.toString(), true));
     }
 
-    public String appendBackName(int span, Object o){
-        return appendBack(span, o.toString(), true);
+    public void appendBackName(StringBuilder serStringint, int span, Object o){
+        serStringint.append(appendBack(span, o.toString(), true));
     }
 
     public String primitiveHandler(Object o) {

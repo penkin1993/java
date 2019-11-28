@@ -19,7 +19,7 @@ public class SerClassType {
         } else if (o instanceof Collection) { // массив или коллекция
             return serString.append(serObj.collectionHandler(span, o)).toString();
         } else {
-            serString.append(serObj.appendFrontName(span, o.getClass().getName()));
+            serObj.appendFrontName(serString, span, o.getClass().getName());
             span++;
 
             Class<?> clazz = o.getClass();
@@ -36,7 +36,7 @@ public class SerClassType {
                 }
             }
             span--;
-            serString.append(serObj.appendBackName(span, o.getClass().getName()));
+            serObj.appendBackName(serString, span, o.getClass().getName());
             return serString.toString();
 
         }
