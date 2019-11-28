@@ -26,9 +26,9 @@ public class Main {
         person.phoneNumbers.add("China");
         person.phoneNumbers.add("USSR");
 
-        SerClassType ser = new SerClassType(new XmlSerializer());
+        SerClassType ser = new SerClassType(new JsonSerializer());
 
-        System.out.print(ser.run(0, person));
+        System.out.print(ser.serialize(person));
 
     }
 }

@@ -41,7 +41,7 @@ public class JsonSerializer implements SerClassInterface {
     }
 
     public void appendBackName(StringBuilder serStringint, int span, Object o) {
-        serStringint.delete(serStringint.length() - 3, serStringint.length());
+        serStringint.delete(serStringint.length() - 2, serStringint.length());
         serStringint.append("\n");
         serStringint.append(new String(new char[span]).replace("\0", "    "));
         serStringint.append("}");
@@ -76,6 +76,3 @@ public class JsonSerializer implements SerClassInterface {
 
     }
 }
-
-// TODO: JSON
-// TODO: Заключительный интерфейс

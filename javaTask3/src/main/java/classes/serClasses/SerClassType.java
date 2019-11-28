@@ -1,10 +1,12 @@
 package classes.serClasses;
 
+import classes.Serializer;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 
 
-public class SerClassType {
+public class SerClassType implements Serializer {
     private final SerClassInterface serObj;
 
     public SerClassType(SerClassInterface serObj) {
@@ -38,8 +40,11 @@ public class SerClassType {
             span--;
             serObj.appendBackName(serString, span, o.getClass().getName());
             return serString.toString();
-
         }
+    }
+
+    public String serialize(Object o){
+        return run(0, o);
     }
 }
 
