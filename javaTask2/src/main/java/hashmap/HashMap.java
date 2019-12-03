@@ -1,15 +1,45 @@
 package hashmap;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 
 public class HashMap<K, V> implements SimpleMap<K, V> {
+    private Node<K, V>[] newHashList;
     private int capacity = 16; // вместимость массива
     private int size = 0;
-    private ArrayList<Optional<Node<K, V>>> hashList = NewHashListInit(16);
+    private Node<K, V>[] hashList = NewHashListInit(16);
 
-    private ArrayList<Optional<Node<K, V>>> NewHashListInit(int capacity) {
-        ArrayList<Optional<Node<K, V>>> newHashList = new ArrayList<>(capacity);
+    private Node<K, V>[] NewHashListInit(int capacity) {
+        //ArrayList<Node<K, V>> newHashList = new ArrayList<>(capacity); // TODO: Заменить на array
+        //<Node<K, V>[] newHashList  = new <>[];
+
+        //public Array(Class<E> type, int length)
+        //{
+            // Creates a new array with the specified type and length at runtime
+       // newHashList = (Node<K, V>[]) java.lang.reflect.Array.newInstance(Class<?>, capacity);
+
+        //newHashList = new Node<K, V>[capacity];
+
+
+            //public GenSet(Class<E> c, int s) {
+            // Use Array native method to create array
+            // of a type only known at run time
+            //@SuppressWarnings("unchecked")
+            //final E[] a = (E[]) Array.newInstance(c, s);
+
+
+            newHashList = (Node<K, V>[]) Array.newInstance(Node.class, capacity);
+
+
+
+
+
+
+
+
+
+
         for (int i = 0; i < capacity; i++) {
             newHashList.add(null);
         }
@@ -43,7 +73,7 @@ public class HashMap<K, V> implements SimpleMap<K, V> {
             expandList();
             int index = getIndex(key);
             try {
-                Node node = hashList.get(index).orElse(null);
+                Node node = hashList.get(index); //
                 while (true) {
                     if (node.getNextNode() == null) {
                         node.setNextNode(new Node<>(key, value));
@@ -53,7 +83,7 @@ public class HashMap<K, V> implements SimpleMap<K, V> {
                     }
                 }
             } catch (NullPointerException e) {
-                hashList.set(index, Optional.of(new Node<>(key, value)));
+                hashList.set(index, new Node<>(key, value));
             }
             this.size += 1;
         }
@@ -67,7 +97,7 @@ public class HashMap<K, V> implements SimpleMap<K, V> {
     private Node getNode(K key) {
         int index = getIndex(key);
         try {
-            Node node = hashList.get(index).orElse(null);
+            Node node = hashList.get(index);
             while (true) {
                 if (node.getKey().equals(key)) {
                     return node;
@@ -106,7 +136,7 @@ public class HashMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V remove(K key) {
         int index = getIndex(key);
-        Node<K, V> node = hashList.get(index).orElse(null);
+        Node<K, V> node = hashList.get(index);
         if (node == null) {
             //throw new NoSuchElementException("The remove element does not exist");
             return null;
@@ -194,13 +224,13 @@ public class HashMap<K, V> implements SimpleMap<K, V> {
 
     class NodeIterator implements Iterator {
         Node<K, V> currentNode;
-        ArrayList<Optional<Node<K, V>>> hashList;
+        ArrayList<Node<K, V>> hashList;
 
         // initialize pointer to head of the list for iteration
-        NodeIterator(ArrayList<Optional<Node<K, V>>> hashList, int index) {
+        NodeIterator(ArrayList<Node<K, V>> hashList, int index) {
             this.hashList = hashList;
             try {
-                this.currentNode = hashList.get(index).orElse(null);
+                this.currentNode = hashList.get(index);
             } catch (NullPointerException e) {
                 this.currentNode = null;
             }
