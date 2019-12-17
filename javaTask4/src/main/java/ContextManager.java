@@ -1,7 +1,7 @@
 import Interfaces.Context;
 import Interfaces.ExecutionStatistics;
 
-public class ContextManager implements Context {
+class ContextManager implements Context {
     int getCompletedTaskCount();
     int getFailedTaskCount();
     int getInterruptedTaskCount();
