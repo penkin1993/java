@@ -1,23 +1,20 @@
 import Interfaces.Context;
 import Interfaces.ExecutionManager;
+import Tasks.TaskDecorator;
 
 public class Manager implements ExecutionManager {
+
     public Context execute(Runnable[] tasks){
 
-        // TODO: Как все это навесить ??? // Notify ????
+        TaskDecorator[] runnableTasks = new TaskDecorator[tasks.length];
+        for (int i = 0; i < runnableTasks.length; i++){
+            runnableTasks[i] = new TaskDecorator(tasks[i]); // обертываем все таски !!!
+        }
+
+        for(TaskDecorator item : runnableTasks) // Запускаем исполнение всех тасков
+            new Thread(item).start();
 
 
-
-
-        // TODO: Продекорировать, запустить и вернуть пульт управления
-        // TODO: 1. Создать несколько тасков, продекарировать их и записать их в массив
-        // TODO: 2. Запустить ваполнения тасков и вернуть Context
-
-
-
-
-
-
-        return new ContextManager();
+        return new ContextManager(runnableTasks);
     }
 }
