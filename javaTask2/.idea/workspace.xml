@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f84cef1d-60bc-4917-991f-18361a99727e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hashmap/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hashmap/HashMap.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -47,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/hashmap/HashMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="73" selection-start-line="27" selection-start-column="73" selection-end-line="27" selection-end-column="73" />
+            <state relative-caret-position="255">
+              <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding>
                 <element signature="e#5718#5719#0" expanded="true" />
                 <element signature="e#5750#5751#0" expanded="true" />
@@ -299,14 +298,11 @@
       <workItem from="1574926048335" duration="244000" />
       <workItem from="1575372422766" duration="4012000" />
       <workItem from="1575396279753" duration="51000" />
-      <workItem from="1575541834471" duration="1591000" />
+      <workItem from="1575541834471" duration="1637000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MainHashMapTest_assertHashMap2 - 2019.11.02 at 05h 07m 50s.xml">
-      <configuration name="MainHashMapTest.assertHashMap2" configurationId="GradleRunConfiguration" />
-    </history-entry>
     <history-entry file="MainHashMapTest_assertHashMap2 - 2019.11.02 at 05h 08m 00s.xml">
       <configuration name="MainHashMapTest.assertHashMap2" configurationId="GradleRunConfiguration" />
     </history-entry>
@@ -334,9 +330,12 @@
     <history-entry file="MainHashMapTest_assertHashMap2 - 2019.12.03 at 18h 42m 40s.xml">
       <configuration name="MainHashMapTest.assertHashMap2" configurationId="GradleRunConfiguration" />
     </history-entry>
+    <history-entry file="MainHashMapTest_assertHashMap2 - 2019.12.05 at 13h 56m 25s.xml">
+      <configuration name="MainHashMapTest.assertHashMap2" configurationId="GradleRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53155000" />
+    <option name="totallyTimeSpent" value="53201000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="52" y="23" width="1628" height="1027" extended-state="0" />
@@ -351,7 +350,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.171123" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26096258" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26096258" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -465,8 +464,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hashmap/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="73" selection-start-line="27" selection-start-column="73" selection-end-line="27" selection-end-column="73" />
+        <state relative-caret-position="255">
+          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
           <folding>
             <element signature="e#5718#5719#0" expanded="true" />
             <element signature="e#5750#5751#0" expanded="true" />
