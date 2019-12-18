@@ -7,13 +7,13 @@ public class Task2 implements Runnable{
     }
 
     private static void someLogic() {
-        System.out.println("StartTask1");
+        System.out.println("StartTask2");
         try {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
-            e.printStackTrace(); // TODO: Отправлять наверх !!!
+            e.printStackTrace();
         }
-        System.out.println("FinishTask1");
+        System.out.println("FinishTask2");
     }
 
 
