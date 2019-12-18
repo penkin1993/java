@@ -11,7 +11,7 @@ public class Task1 implements Runnable{
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            e.printStackTrace(); // TODO: Отправлять наверх !!!
+            e.printStackTrace();
         }
         System.out.println("FinishTask1");
     }

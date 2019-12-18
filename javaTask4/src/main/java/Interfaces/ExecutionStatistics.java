@@ -5,3 +5,4 @@ public interface ExecutionStatistics {
     int getMaxExecutionTimeInMs(); // максимальное время выполнения среди тасков в миллисекундах
     int getAverageExecutionTimeInMs(); //среднее арифметическое время выполнения тасков в миллисекундах.
 }
+

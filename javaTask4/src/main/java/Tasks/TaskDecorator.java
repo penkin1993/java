@@ -1,26 +1,48 @@
 package Tasks;
 
-public class TaskDecorator implements Runnable{
+public class TaskDecorator implements Runnable {
     private Runnable task;
-    private long startTime = -1; // TODO: Сделать видимыми главному потоку !!!!
-    boolean isFinished = false; // TODO: Сделать видимыми главному потоку !!!!
+    final private long[] startTime;
+    final private boolean[] isFinished;
+    final private boolean[] isFailed;
+    final private boolean[] isInterrupt;
+    private int id;
 
-    public TaskDecorator(Runnable task){
+    public TaskDecorator(Runnable task, long[] startTime, boolean[] isFinished,
+                         boolean[] isFailed, boolean[] isInterrupt, int id) {
         this.task = task;
+        this.startTime = startTime;
+        this.isFinished = isFinished;
+        this.isFailed = isFailed;
+        this.isInterrupt = isInterrupt;
+        this.id = id;
     }
 
     public void run() {
-        startTime = System.nanoTime();
+        synchronized (startTime) {
+            startTime[id] = System.currentTimeMillis();
+            synchronized (isInterrupt){
+                if(isInterrupt[id]){
+                    startTime[id] = -2;
+                    return;
+                }
+            }
+        }
 
-        task.run();
-        // TODO: Пилить через notify ????
+        try {
+            task.run();
+        }catch (Exception e){
+            synchronized (isFailed){
+                this.isFailed[id] = true;
+            }
+        }
 
-        startTime = System.nanoTime() - startTime; // TODO: В одной секции !!!
-        isFinished = true; // TODO:
 
+        synchronized (startTime) {
+            startTime[id] = System.currentTimeMillis() - startTime[id];
+            synchronized (isFinished) {
+                isFinished[id] = true;
+            }
+        }
     }
-
-
-
-    // TODO: Добавть методы для управления !!!!
 }
