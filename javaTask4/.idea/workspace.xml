@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cd60eb21-f493-4566-bc75-2319edfee21c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/ContextManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ContextManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Interfaces/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Manager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -39,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ContextManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="88" selection-start-line="88" selection-end-line="88" />
+            <state relative-caret-position="588">
+              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -219,12 +217,12 @@
       <workItem from="1576652446721" duration="464000" />
       <workItem from="1576658006568" duration="1898000" />
       <workItem from="1576661840971" duration="559000" />
-      <workItem from="1576696959481" duration="5902000" />
+      <workItem from="1576696959481" duration="6262000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16522000" />
+    <option name="totallyTimeSpent" value="16882000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -372,27 +370,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tasks/TaskDecorator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Interfaces/ExecutionStatistics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Interfaces/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -410,10 +387,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Interfaces/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Interfaces/ExecutionStatistics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tasks/TaskDecorator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ContextManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="588">
+          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

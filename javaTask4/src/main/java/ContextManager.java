@@ -88,8 +88,16 @@ class ContextManager implements Context {
     }
 
 
-    void onFinish(Runnable callback); // TODO ??? 3
-
+    public void onFinish(Runnable callback){
+        while (!isFinished()) {
+            try {
+                callback.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        callback.run();
+    }
 }
 
 
