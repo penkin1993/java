@@ -9,6 +9,7 @@ public class Manager implements ExecutionManager {
         boolean[] isFinished = new boolean[tasks.length];
         boolean[] isFailed = new boolean[tasks.length];
         boolean[] isInterrupt = new boolean[tasks.length];
+        Thread[] threads = new Thread[tasks.length];
 
         TaskDecorator[] runnableTasks = new TaskDecorator[tasks.length];
         for (int id = 0; id < runnableTasks.length; id++){
@@ -19,10 +20,11 @@ public class Manager implements ExecutionManager {
             runnableTasks[id] = new TaskDecorator(tasks[id], startTime, isFinished, isFailed, isInterrupt, id);
         }
 
-        for(TaskDecorator item : runnableTasks) // Запускаем исполнение всех тасков
-            new Thread(item).start();
+        for (int i = 0; i < tasks.length; i++){
+            threads[i] = new Thread(runnableTasks[i]);
+            threads[i].start();
+        }
 
-
-        return new ContextManager(runnableTasks, startTime, isFinished, isFailed);
+        return new ContextManager(threads, runnableTasks, startTime, isFinished, isFailed);
     }
 }

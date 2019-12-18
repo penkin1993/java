@@ -8,5 +8,5 @@ public interface Context {
     boolean isFinished();
     void onFinish(Runnable callback);
     ExecutionStatistics getStatistics();
-    void awaitTermination();
+    void awaitTermination() throws InterruptedException;
 }

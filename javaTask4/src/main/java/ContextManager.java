@@ -4,13 +4,15 @@ import Interfaces.ExecutionStatistics;
 import Tasks.TaskDecorator;
 
 class ContextManager implements Context {
+    private Thread[] threads;
     private TaskDecorator[] runnableTasks;
     private long[] startTime;
     private boolean[] isFinished;
     private boolean[] isFailed;
 
-    ContextManager(TaskDecorator[] runnableTasks, long[] startTime, boolean[] isFinished,
+    ContextManager(Thread[] threads, TaskDecorator[] runnableTasks, long[] startTime, boolean[] isFinished,
                    boolean[] isFailed) {
+        this.threads = threads;
         this.runnableTasks = runnableTasks;
         this.startTime = startTime;
         this.isFinished = isFinished;
@@ -64,7 +66,7 @@ class ContextManager implements Context {
 
 
     public int getFailedTaskCount() {
-        synchronized (isFailed){
+        synchronized (isFailed) {
             int sum = 0;
             for (boolean b : isFailed) {
                 sum += b ? 1 : 0;
@@ -73,13 +75,17 @@ class ContextManager implements Context {
         }
     }
 
-    public ExecutionStatistics getStatistics(){
+    public ExecutionStatistics getStatistics() {
         ExecutionStat executionStat = new ExecutionStat(startTime, isFinished);
         return executionStat;
     }
 
-    void awaitTermination(); // TODO: Навешивать join !!!
-    // 10
+    public void awaitTermination() throws InterruptedException {
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new Thread(runnableTasks[i]);
+            threads[i].join();
+        }
+    }
 
 
     void onFinish(Runnable callback); // TODO ??? 3
