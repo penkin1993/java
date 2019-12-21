@@ -1,17 +1,18 @@
 package Interfaces;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExecutionStat implements ExecutionStatistics {
-    long[] startTime;
-    boolean[] isFinished;
+    private long[] startTime;
+   private  boolean[] isFinished;
 
     public ExecutionStat(long[] startTime, boolean[] isFinished){
         this.startTime = startTime;
         this.isFinished = isFinished;
     }
 
-    ArrayList<Long> getStat() {
-        ArrayList<Long> stat = new ArrayList();
+    private List<Long> getStat() {
+        List<Long> stat = new ArrayList<>();
         for (int i = 0; i < isFinished.length; i++) {
             if (isFinished[i]) {
                 stat.add(startTime[i]);
@@ -21,7 +22,7 @@ public class ExecutionStat implements ExecutionStatistics {
     }
 
     public int getMinExecutionTimeInMs(){
-        ArrayList<Long> stat = getStat();
+        List<Long> stat = getStat();
         int min = 1000000000;
         for (int i = 0; i < stat.size(); i++){
             if(startTime[i] < min){
@@ -32,7 +33,7 @@ public class ExecutionStat implements ExecutionStatistics {
     }
 
     public int getMaxExecutionTimeInMs(){
-        ArrayList<Long> stat = getStat();
+        List<Long> stat = getStat();
         int max = 0;
         for (int i = 0; i < stat.size(); i++){
             if(startTime[i] > max){
@@ -44,7 +45,7 @@ public class ExecutionStat implements ExecutionStatistics {
 
 
     public int getAverageExecutionTimeInMs(){
-        ArrayList<Long> stat = getStat();
+        List<Long> stat = getStat();
         int mean = 0;
         for (int i = 0; i < stat.size(); i++){
             mean = (int)startTime[i];

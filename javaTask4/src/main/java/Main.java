@@ -16,6 +16,10 @@ public class Main {
         Manager manager = new Manager();
 
         Context contextManager = manager.execute(runnableArray);
+        contextManager.onFinish(new Task1()); // TODO
+
+
+        
 
         while (!contextManager.isFinished()) {
             TimeUnit.SECONDS.sleep(1);
