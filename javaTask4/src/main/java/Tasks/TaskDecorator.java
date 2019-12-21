@@ -21,18 +21,16 @@ public class TaskDecorator implements Runnable {
     public void run() {
         synchronized (startTime) {
             startTime[id] = System.currentTimeMillis();
-            synchronized (isInterrupt) {
-                if (isInterrupt[id]) {
-                    startTime[id] = -1;
-                    return;
-                }
+            if (isInterrupt[id]) {
+                startTime[id] = -1;
+                return;
             }
         }
 
         try {
             task.run();
         } catch (Exception e) {
-            synchronized (isFailed) {
+            synchronized (startTime) {
                 this.isFailed[id] = true;
             }
         }
@@ -40,9 +38,8 @@ public class TaskDecorator implements Runnable {
 
         synchronized (startTime) {
             startTime[id] = System.currentTimeMillis() - startTime[id];
-            synchronized (isFinished) {
-                isFinished[id] = true;
-            }
+            isFinished[id] = true;
         }
+
     }
 }

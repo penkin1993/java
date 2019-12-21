@@ -3,10 +3,10 @@ import Interfaces.ExecutionStat;
 import Interfaces.ExecutionStatistics;
 
 class ContextManager implements Context {
-    private Thread[] threads;
-    private long[] startTime;
-    private boolean[] isFinished;
-    private boolean[] isFailed;
+    private final Thread[] threads;
+    private final long[] startTime;
+    private final boolean[] isFinished;
+    private final boolean[] isFailed;
 
     ContextManager(Thread[] threads, long[] startTime, boolean[] isFinished,
                    boolean[] isFailed) {
@@ -17,8 +17,8 @@ class ContextManager implements Context {
     }
 
     public int getCompletedTaskCount() {
-        int sum = 0;
-        synchronized (isFinished) {
+        synchronized (startTime) {
+            int sum = 0;
             for (boolean b : isFinished) {
                 sum += b ? 1 : 0;
             }
@@ -52,7 +52,7 @@ class ContextManager implements Context {
         if (sum == startTime.length) {
             return true;
         }
-        synchronized (isFinished) {
+        synchronized (startTime) {
             sum = getCompletedTaskCount();
             if (sum == isFinished.length) {
                 return true;
@@ -63,7 +63,7 @@ class ContextManager implements Context {
 
 
     public int getFailedTaskCount() {
-        synchronized (isFailed) {
+        synchronized (startTime) {
             int sum = 0;
             for (boolean b : isFailed) {
                 sum += b ? 1 : 0;
@@ -78,11 +78,10 @@ class ContextManager implements Context {
     }
 
     public void awaitTermination() throws InterruptedException {
-        for (int i = 0; i < threads.length; i++) {
+        for (int i = 0; i < threads.length; i++) { // TODO
             threads[i].join();
         }
     }
-
 
     public void onFinish(Runnable callback) throws InterruptedException {
         this.awaitTermination();
