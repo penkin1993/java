@@ -3,13 +3,13 @@ package Tasks;
 public class TaskDecorator implements Runnable {
     private Runnable task;
     private final long[] startTime;
-    private final boolean[] isFinished;
-    private final boolean[] isFailed;
-    private final boolean[] isInterrupt;
+    private final Boolean[] isFinished;
+    private final Boolean[] isFailed;
+    private final Boolean[] isInterrupt;
     private int id;
 
-    public TaskDecorator(Runnable task, long[] startTime, boolean[] isFinished,
-                         boolean[] isFailed, boolean[] isInterrupt, int id) {
+    public TaskDecorator(Runnable task, long[] startTime, Boolean[] isFinished,
+                         Boolean[] isFailed, Boolean[] isInterrupt, int id) {
         this.task = task;
         this.startTime = startTime;
         this.isFinished = isFinished;

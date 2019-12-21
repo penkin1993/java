@@ -2,14 +2,16 @@ import Interfaces.Context;
 import Interfaces.ExecutionStat;
 import Interfaces.ExecutionStatistics;
 
+import java.util.Arrays;
+
 class ContextManager implements Context {
     private final Thread[] threads;
     private final long[] startTime;
-    private final boolean[] isFinished;
-    private final boolean[] isFailed;
+    private final Boolean[] isFinished;
+    private final Boolean[] isFailed;
 
-    ContextManager(Thread[] threads, long[] startTime, boolean[] isFinished,
-                   boolean[] isFailed) {
+    ContextManager(Thread[] threads, long[] startTime, Boolean[] isFinished,
+                   Boolean[] isFailed) {
         this.threads = threads;
         this.startTime = startTime;
         this.isFinished = isFinished;
@@ -26,11 +28,10 @@ class ContextManager implements Context {
         }
     }
 
+
     public void interrupt() {
         synchronized (startTime) {
-            for (int i = 0; i < isFinished.length; i++) {
-                isFinished[i] = true;
-            }
+            Arrays.stream(isFinished).forEach(item -> item = true);
         }
     }
 
@@ -52,13 +53,8 @@ class ContextManager implements Context {
         if (sum == startTime.length) {
             return true;
         }
-        synchronized (startTime) {
-            sum = getCompletedTaskCount();
-            if (sum == isFinished.length) {
-                return true;
-            }
-        }
-        return false;
+        sum = getCompletedTaskCount();
+        return (sum == isFinished.length);
     }
 
 
@@ -77,15 +73,18 @@ class ContextManager implements Context {
         return executionStat;
     }
 
-    public void awaitTermination() throws InterruptedException {
-        for (int i = 0; i < threads.length; i++) { // TODO
-            threads[i].join();
-        }
+    public void awaitTermination() {
+        Arrays.stream(threads).forEach(thread -> {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                System.out.println("InterruptedException");
+            }
+        });
     }
 
-    public void onFinish(Runnable callback) throws InterruptedException {
+    public void onFinish(Runnable callback) {
         this.awaitTermination();
-
         callback.run();
     }
 }

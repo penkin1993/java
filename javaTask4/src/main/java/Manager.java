@@ -6,9 +6,9 @@ public class Manager implements ExecutionManager {
 
     public Context execute(Runnable[] tasks) {
         long[] startTime = new long[tasks.length];
-        boolean[] isFinished = new boolean[tasks.length];
-        boolean[] isFailed = new boolean[tasks.length];
-        boolean[] isInterrupt = new boolean[tasks.length];
+        Boolean[] isFinished = new Boolean[tasks.length];
+        Boolean[] isFailed = new Boolean[tasks.length];
+        Boolean[] isInterrupt = new Boolean[tasks.length];
         Thread[] threads = new Thread[tasks.length];
 
         TaskDecorator[] runnableTasks = new TaskDecorator[tasks.length];
