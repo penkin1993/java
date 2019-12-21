@@ -4,7 +4,7 @@ import Tasks.TaskDecorator;
 
 public class Manager implements ExecutionManager {
 
-    public Context execute(Runnable[] tasks){
+    public Context execute(Runnable[] tasks) {
         long[] startTime = new long[tasks.length];
         boolean[] isFinished = new boolean[tasks.length];
         boolean[] isFailed = new boolean[tasks.length];
@@ -12,7 +12,7 @@ public class Manager implements ExecutionManager {
         Thread[] threads = new Thread[tasks.length];
 
         TaskDecorator[] runnableTasks = new TaskDecorator[tasks.length];
-        for (int id = 0; id < runnableTasks.length; id++){
+        for (int id = 0; id < runnableTasks.length; id++) {
             startTime[id] = -1;
             isFinished[id] = false;
             isFailed[id] = false;
@@ -20,7 +20,7 @@ public class Manager implements ExecutionManager {
             runnableTasks[id] = new TaskDecorator(tasks[id], startTime, isFinished, isFailed, isInterrupt, id);
         }
 
-        for (int i = 0; i < tasks.length; i++){
+        for (int i = 0; i < tasks.length; i++) {
             threads[i] = new Thread(runnableTasks[i]);
             threads[i].start();
         }

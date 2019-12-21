@@ -41,7 +41,7 @@ class ContextManager implements Context {
         synchronized (startTime) {
             int sum = 0;
             for (long item : startTime) {
-                if (item == -2) {
+                if (item == -1) {
                     sum++;
                 }
             }
@@ -88,7 +88,7 @@ class ContextManager implements Context {
     }
 
 
-    public void onFinish(Runnable callback){
+    public void onFinish(Runnable callback) {
         while (!isFinished()) {
             try {
                 callback.wait();

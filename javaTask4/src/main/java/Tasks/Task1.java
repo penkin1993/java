@@ -1,6 +1,6 @@
 package Tasks;
 
-public class Task1 implements Runnable{
+public class Task1 implements Runnable {
 
     public void run() {
         someLogic();
