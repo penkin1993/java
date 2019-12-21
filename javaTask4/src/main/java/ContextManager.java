@@ -1,19 +1,16 @@
 import Interfaces.Context;
 import Interfaces.ExecutionStat;
 import Interfaces.ExecutionStatistics;
-import Tasks.TaskDecorator;
 
 class ContextManager implements Context {
     private Thread[] threads;
-    private TaskDecorator[] runnableTasks;
     private long[] startTime;
     private boolean[] isFinished;
     private boolean[] isFailed;
 
-    ContextManager(Thread[] threads, TaskDecorator[] runnableTasks, long[] startTime, boolean[] isFinished,
+    ContextManager(Thread[] threads, long[] startTime, boolean[] isFinished,
                    boolean[] isFailed) {
         this.threads = threads;
-        this.runnableTasks = runnableTasks;
         this.startTime = startTime;
         this.isFinished = isFinished;
         this.isFailed = isFailed;
@@ -82,20 +79,14 @@ class ContextManager implements Context {
 
     public void awaitTermination() throws InterruptedException {
         for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread(runnableTasks[i]);
             threads[i].join();
         }
     }
 
 
-    public void onFinish(Runnable callback) {
-        while (!isFinished()) {
-            try {
-                callback.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void onFinish(Runnable callback) throws InterruptedException {
+        this.awaitTermination();
+
         callback.run();
     }
 }

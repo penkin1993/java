@@ -25,6 +25,6 @@ public class Manager implements ExecutionManager {
             threads[i].start();
         }
 
-        return new ContextManager(threads, runnableTasks, startTime, isFinished, isFailed);
+        return new ContextManager(threads, startTime, isFinished, isFailed);
     }
 }

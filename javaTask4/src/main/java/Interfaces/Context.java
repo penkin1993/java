@@ -11,7 +11,7 @@ public interface Context {
 
     boolean isFinished();
 
-    void onFinish(Runnable callback);
+    void onFinish(Runnable callback) throws InterruptedException;
 
     ExecutionStatistics getStatistics();
 
