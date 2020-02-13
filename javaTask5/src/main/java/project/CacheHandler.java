@@ -1,14 +1,13 @@
 package project;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.*;
 
 
 public class CacheHandler implements InvocationHandler {
-    CacheDumpLoader cacheDumpLoader;
+    private CacheDumpLoader cacheDumpLoader = new CacheDumpLoader();
     private Object delegate;
     String rootFolder;
 
@@ -33,35 +32,16 @@ public class CacheHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         List<Object> key = toKey(method, args);
+        if (cacheDumpLoader.containsKey(key)) {
+            return cacheDumpLoader.load(key); // вернуть результат из кэша
 
-        // парарметры кэширования
-        HashMap<String, Object> cacheParams = AnnotationCacheHandler.validateStringLength(this, method);
-
-
-
-
-
-
-
-
-
-        return cache.computeIfAbsent(key, k -> {
-            try {
-                return method.invoke(delegate, args);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-
-
-
-
-
-
-
-
-
+        } else {
+            // парарметры кэширования
+            HashMap<String, Object> cacheParams = AnnotationCacheHandler.validateStringLength(this, method);
+            Object result = method.invoke(delegate, args);
+            cacheDumpLoader.dump(key, cacheParams, result);
+            return result;
+        }
 
     }
 
@@ -72,13 +52,6 @@ public class CacheHandler implements InvocationHandler {
         return key;
     }
 }
-
-
-// TODO: Само кэширование поручить отдельному классу
-
-// TODO: Создать отдельный класс со статик методом. Он и будет сохранять.
-
-
 
 
 /*

@@ -13,25 +13,18 @@ public class CacheDumpLoader {
 
 
     // метод для сохранения в словарь результатов расчета
-    public void dump(List<Object> key, HashMap<String, Object> cacheParams){
+    public void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result){
 
 
 
 
 
-        
+
     }
 
     // метод проверки наличия ключа
     public boolean containsKey(List<Object> key){
-
-
-
-
-
-
-
-        return true;
+        return resultPath.containsKey(key);
     }
 
 
