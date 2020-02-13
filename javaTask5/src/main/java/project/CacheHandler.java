@@ -55,6 +55,19 @@ public class CacheHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         List<Object> key = toKey(method, args);
 
+        AnnotationCacheHandler.validateStringLength(method);
+
+        // TODO: Снять параметры с метода и объединить с параметрами CacheHandler
+
+
+
+
+
+
+
+
+
+
         return cache.computeIfAbsent(key, k -> {
             try {
                 return method.invoke(delegate, args);
@@ -62,6 +75,15 @@ public class CacheHandler implements InvocationHandler {
                 throw new RuntimeException(e);
             }
         });
+
+
+
+
+
+
+
+
+
     }
 
     private List<Object> toKey(Method method, Object[] args) {
