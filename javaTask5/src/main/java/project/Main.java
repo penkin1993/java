@@ -1,21 +1,28 @@
 package project;
 
-import project.CacheProxy;
-import project.Loader;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
 
-        CacheProxy cacheProxy = new CacheProxy(...); 
-        Service service = cacheProxy.cache(new ServiceImpl());
-         Loader loader = cacheProxy.cache(new LoaderImpl());
+        Class[] defaultIdentityBy = {Object.class};
+        CacheHandler cacheHandler = new CacheHandler("./", CacheType.FILE, 100,
+                "BLABLA", true, defaultIdentityBy);
+
+        Calculator calculator = cacheHandler.cache(new CalculatorImpl());
+        System.out.println(calculator.run("Hello"));
+        System.out.println(calculator.run("World"));
+        System.out.println(calculator.run("World"));
+
+
+        Service serviceImpl = cacheHandler.cache(new ServiceImpl());
+        System.out.println(serviceImpl.work("World1"));
+        System.out.println(serviceImpl.work("World2"));
+        System.out.println(serviceImpl.work("World3"));
+        System.out.println(serviceImpl.work("World4"));
+        System.out.println(serviceImpl.work("World5"));
+        System.out.println(serviceImpl.work("World6"));
+        System.out.println(serviceImpl.work("World7"));
 
     }
 }
 
-
-// CacheProxy -- кэширующий прокси (этот паттерн и испольщовать)
-// с методом кэш. Т.е. он декорирует объект и возвращает его обернутую версию (паттерн Декоратор ?).
-// Использовать дженерики !!!
-
-// Реализовывать еще и метод аннотации cashe ???
