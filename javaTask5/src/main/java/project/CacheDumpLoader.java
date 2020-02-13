@@ -18,13 +18,13 @@ class CacheDumpLoader {
 
     // метод для сохранения в словарь результатов расчета
     void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result){
-        // "rootFolder"
-        // "cacheType"
+        // "identityBy" // TODO: Вынести наверх. Учитывать при вычислении ключа !!!
         // "listSize"
         // "fileNamePrefix"
+        // "cacheType"
         // "zip"
-        // "identityBy"
-        // TODO: Расположить в нужном порядке
+        // "rootFolder"
+        // TODO: Расположить в нужном порядке. Паттрен цепочка обязанностей
 
 
 
@@ -56,8 +56,3 @@ class CacheDumpLoader {
 
 
 
-
-
-
-
-// TODO: Какой патерн лучше использовать ????
