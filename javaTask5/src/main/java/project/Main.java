@@ -1,18 +1,13 @@
 package project;
 
-
-import project.cache_annotations.CacheType;
 import project.examples.Calculator;
 import project.examples.CalculatorImpl;
 import project.examples.Service;
 import project.examples.ServiceImpl;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
-
-        Class[] defaultIdentityBy = {Object.class};
-        CacheHandler cacheHandler = new CacheHandler("./", CacheType.FILE, 100,
-                "BLABLA", true, defaultIdentityBy);
+        CacheHandler cacheHandler = new CacheHandler("./");
 
         Service serviceImpl = cacheHandler.cache(new ServiceImpl()); // TODO: Работает не так ???!!!
         System.out.println(serviceImpl.work("World1"));

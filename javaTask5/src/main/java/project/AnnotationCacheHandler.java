@@ -6,18 +6,22 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 class AnnotationCacheHandler {
-    private final Map<List<Object>, Object> cache = new HashMap<>();
+    static HashMap<String, Object>  validateStringLength(CacheHandler cacheHandler, Method method) throws Exception {
+        HashMap<String, Object> cacheParams = new HashMap<>();
 
-    static void validateStringLength(Method method) throws Exception {
+        cacheParams.put("rootFolder", cacheHandler.rootFolder);
 
         if (method.isAnnotationPresent(Cache.class)) {
             Cache an = method.getAnnotation(Cache.class);
 
-            System.out.println(an.cacheType());
-            System.out.println(an.listSize());
-            System.out.println(an.fileNamePrefix());
+            cacheParams.put("cacheType", an.cacheType());
+            cacheParams.put("listSize", an.listSize());
+            cacheParams.put("fileNamePrefix", an.fileNamePrefix());
+            cacheParams.put("zip", an.zip());
+            cacheParams.put("identityBy", an.identityBy());
         }
 
+        return cacheParams;
     }
 
 
