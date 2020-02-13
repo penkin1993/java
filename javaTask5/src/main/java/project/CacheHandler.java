@@ -39,10 +39,9 @@ public class CacheHandler implements InvocationHandler {
         this.defaultZip = cacheHandler.defaultZip;
         this.defaultIdentityBy = cacheHandler.defaultIdentityBy;
 
-        this.cache = new HashMap<>();
         this.delegate = delegate;
+        this.cache = new HashMap<>();
     }
-
 
     public <T> T cache(T service){
         return (T) Proxy.newProxyInstance(
@@ -52,21 +51,10 @@ public class CacheHandler implements InvocationHandler {
         );
     }
 
-
-    // TODO: Как работает newProxyInstance ???
-
-    // TODO: Само кэширование поручить отдельному классу
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
-        // TODO: 1. Добавить в словарь еще и имя класса
-
-        // TODO 3. Снимать аннотации и кэшировать согласно ним (Как правильно это написать с точки зрения архитектуры ???)
-        // TODO: Создать отдельный класс со статик методом. Он и будет сохранять. Реализовать это после предыдущих шагов
-
-
         List<Object> key = toKey(method, args);
+
         return cache.computeIfAbsent(key, k -> {
             try {
                 return method.invoke(delegate, args);
@@ -82,17 +70,23 @@ public class CacheHandler implements InvocationHandler {
         key.addAll(Arrays.asList(args));
         return key;
     }
-
-    /*
-    public static void main(String[] args) {
-        Class[] defaultIdentityBy = {Object.class};
-        CacheHandler cacheHandler = new CacheHandler("./", CacheType.FILE, 100,
-                "BLABLA", true, defaultIdentityBy);
-
-        String newBla = cacheHandler.cache("dfsdfd");
-    }
-     */
 }
+
+
+
+
+
+
+// TODO: Как работает newProxyInstance ???
+
+// TODO: Само кэширование поручить отдельному классу
+
+// TODO: 1. Добавить в словарь еще и имя класса
+
+// TODO 3. Снимать аннотации и кэшировать согласно ним (Как правильно это написать с точки зрения архитектуры ???)
+// TODO: Создать отдельный класс со статик методом. Он и будет сохранять. Реализовать это после предыдущих шагов
+
+
 
 
 /*
