@@ -6,7 +6,7 @@ import project.cache_annotations.CacheType;
 import java.util.Date;
 import java.util.List;
 
-interface Service {
+public interface Service {
     @Cache(cacheType = CacheType.FILE, fileNamePrefix = "data", identityBy = {String.class, double.class})
     List<String> run(String item, double value, Date date);
 

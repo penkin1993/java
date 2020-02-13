@@ -1,6 +1,6 @@
 package project.cache_annotations;
 
-enum CacheType {
+public enum CacheType {
     FILE,
     IN_MEMORY
 }
