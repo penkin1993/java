@@ -1,6 +1,12 @@
 package project;
 
 
+import project.cache_annotations.CacheType;
+import project.examples.Calculator;
+import project.examples.CalculatorImpl;
+import project.examples.Service;
+import project.examples.ServiceImpl;
+
 public class Main{
     public static void main(String[] args) {
 

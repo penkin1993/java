@@ -1,4 +1,4 @@
-package project;
+package project.cache_annotations;
 
 enum CacheType {
     FILE,

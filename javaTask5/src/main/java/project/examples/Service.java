@@ -1,4 +1,7 @@
-package project;
+package project.examples;
+
+import project.cache_annotations.Cache;
+import project.cache_annotations.CacheType;
 
 import java.util.Date;
 import java.util.List;

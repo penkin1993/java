@@ -1,9 +1,6 @@
-package project;
+package project.examples;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class CalculatorImpl implements Calculator{
+public class CalculatorImpl implements Calculator {
     @Override
     public int run(String arg){
         try{

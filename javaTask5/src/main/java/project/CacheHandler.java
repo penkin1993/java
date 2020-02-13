@@ -1,5 +1,7 @@
 package project;
 
+import project.cache_annotations.CacheType;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

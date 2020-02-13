@@ -1,4 +1,6 @@
-package project;
+package project.examples;
+
+import project.examples.Service;
 
 import java.util.Date;
 import java.util.List;
