@@ -7,55 +7,47 @@ import project.save_load_handlers.ZipDumpHandler;
 import java.util.HashMap;
 import java.util.List;
 
-public class CacheDumpLoader {
+class CacheDumpLoader {
 
     // Массив результатов. (Если все храниться в памяти)
     private HashMap<List<Object>, Object> inMemoryResults = new HashMap<>();
 
     // Словарь для поиска результата  на диске
-    private HashMap<List<Object>, Object> onDiskResults = new HashMap<>(); // может можно упростить ???
+    private HashMap<List<Object>, ZipDumpHandler> onDiskResults = new HashMap<>(); // может можно упростить ???
 
     // метод проверки наличия ключа
-    boolean containsKey(List<Object> key){
+    boolean containsKey(List<Object> key) {
         return onDiskResults.containsKey(key) | inMemoryResults.containsKey(key);
     }
 
     // метод для сохранения в словарь результатов расчета
-    void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result){
+    void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result) {
         // ограничиваем длину, если объект кастуется в массив
-        ListSizeHandler listSizeHandler = new ListSizeHandler((int)cacheParams.get("listSize"));
+        ListSizeHandler listSizeHandler = new ListSizeHandler((int) cacheParams.get("listSize"));
         Object listResult = listSizeHandler.cut(result);
 
         // сохранение на диск или в оперативную память
-        if (cacheParams.get("cacheType") == CacheType.IN_MEMORY){
+        if (cacheParams.get("cacheType") == CacheType.IN_MEMORY) {
             inMemoryResults.put(key, listResult);
 
-        } else{ // сохранение на диск
-            ZipDumpHandler zipDumpHandler = new ZipDumpHandler((boolean)cacheParams.get("zip"),
-                    (String)cacheParams.get("fileNamePrefix"), (String) cacheParams.get("rootFolder"));
+        } else { // сохранение на диск
+            ZipDumpHandler zipDumpHandler = new ZipDumpHandler((boolean) cacheParams.get("zip"),
+                    (String) cacheParams.get("fileNamePrefix"), (String) cacheParams.get("rootFolder"));
             zipDumpHandler.dump(result);
 
-            onDiskResults.put(key, new Object []{cacheParams.get("zip"),cacheParams.get("fileNamePrefix"),
-                    cacheParams.get("rootFolder")});
+            onDiskResults.put(key, zipDumpHandler);
 
         }
     }
     // метод для извлечения рассчетов
-    Object load(List<Object> key){
-        // как извлекать ???
+    Object load(List<Object> key) {
+        if (inMemoryResults.containsKey(key)) {
+            return inMemoryResults.get(key);
 
-
-
-
-
-
-
-
-
-
-
-
-        return null;
+        } else {
+            ZipDumpHandler zipDumpHandler = onDiskResults.get(key);
+            return  zipDumpHandler.load();
+        }
     }
 }
 
