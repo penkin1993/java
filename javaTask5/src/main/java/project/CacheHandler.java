@@ -31,13 +31,18 @@ public class CacheHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        List<Object> key = toKey(method, args);
+        HashMap<String, Object> cacheParams = AnnotationCacheHandler.validateStringLength(this, method);
+
+        //if cacheParams.containsKey("identityBy"){ // TODO: add
+        List<Class> identityBy = Arrays.asList((Class[]) cacheParams.remove("identityBy"));
+        Object[] keyArgs = Arrays.stream(args).filter(i -> identityBy.contains(i.getClass())).toArray();
+        List<Object> key = toKey(method, keyArgs);
+
         if (cacheDumpLoader.containsKey(key)) {
             return cacheDumpLoader.load(key); // вернуть результат из кэша
 
         } else {
             // парарметры кэширования
-            HashMap<String, Object> cacheParams = AnnotationCacheHandler.validateStringLength(this, method);
             Object result = method.invoke(delegate, args);
             cacheDumpLoader.dump(key, cacheParams, result);
             return result;

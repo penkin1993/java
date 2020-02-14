@@ -15,6 +15,6 @@ public @interface Cache {
 
     boolean zip() default false;
 
-    Class[] identityBy() default {String.class};
+    Class[] identityBy() default {String.class, double.class};
 
 }

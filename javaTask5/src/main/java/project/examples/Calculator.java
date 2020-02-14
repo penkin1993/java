@@ -4,6 +4,6 @@ import project.cache_annotations.Cache;
 import project.cache_annotations.CacheType;
 
 public interface Calculator {
-    @Cache(cacheType = CacheType.FILE, fileNamePrefix = "data", identityBy = {String.class, double.class})
+    @Cache(cacheType = CacheType.FILE, fileNamePrefix = "data")
     int run(String arg);
 }
