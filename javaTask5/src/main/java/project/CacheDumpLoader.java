@@ -4,6 +4,7 @@ import project.cache_annotations.CacheType;
 import project.save_load_handlers.ListSizeHandler;
 import project.save_load_handlers.ZipDumpHandler;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,12 +32,15 @@ class CacheDumpLoader {
             inMemoryResults.put(key, listResult);
 
         } else { // сохранение на диск
-            ZipDumpHandler zipDumpHandler = new ZipDumpHandler((boolean) cacheParams.get("zip"),
-                    (String) cacheParams.get("fileNamePrefix"), (String) cacheParams.get("rootFolder"));
+            String cachePrefix  = (String) cacheParams.get("fileNamePrefix");
+            if (cachePrefix.equals("__None__")) {
+                cachePrefix = ((Method) key.get(0)).getName();
+            }
+
+            ZipDumpHandler zipDumpHandler = new ZipDumpHandler((boolean) cacheParams.get("zip"), cachePrefix,
+                    (String) cacheParams.get("rootFolder"));
             zipDumpHandler.dump(result);
-
             onDiskResults.put(key, zipDumpHandler);
-
         }
     }
     // метод для извлечения рассчетов
