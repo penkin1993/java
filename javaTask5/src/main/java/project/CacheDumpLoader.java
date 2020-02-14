@@ -4,6 +4,7 @@ import project.cache_annotations.CacheType;
 import project.save_load_handlers.ListSizeHandler;
 import project.save_load_handlers.ZipDumpHandler;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ class CacheDumpLoader {
     }
 
     // метод для сохранения в словарь результатов расчета
-    void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result) {
+    void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result) throws IOException {
         // ограничиваем длину, если объект кастуется в массив
         ListSizeHandler listSizeHandler = new ListSizeHandler((int) cacheParams.get("listSize"));
         Object listResult = listSizeHandler.cut(result);
