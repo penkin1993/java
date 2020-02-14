@@ -1,46 +1,46 @@
 package project;
 
-import java.util.ArrayList;
+import project.cache_annotations.CacheType;
+import project.save_load_handlers.ListSizeHandler;
+import project.save_load_handlers.ZipDumpHandler;
+
 import java.util.HashMap;
 import java.util.List;
 
-class CacheDumpLoader {
-    // Словарь для поиска результата в памяти / на диске
-    private HashMap<List<Object>, HashMap<String, Object>> resultPath = new HashMap<>();
+public class CacheDumpLoader {
 
     // Массив результатов. (Если все храниться в памяти)
-    List<Object> inMemoryResults = new ArrayList<>();
+    public HashMap<List<Object>, Object> inMemoryResults = new HashMap<>();
+
+    // Словарь для поиска результата  на диске
+    private HashMap<List<Object>, HashMap<String, Object>> onDiskResults = new HashMap<>(); // может можно упростить ???
 
     // метод проверки наличия ключа
     boolean containsKey(List<Object> key){
-        return resultPath.containsKey(key);
+        return onDiskResults.containsKey(key) | inMemoryResults.containsKey(key);
     }
 
     // метод для сохранения в словарь результатов расчета
     void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result){
+        // ограничиваем длину, если объект кастуется в массив
+        ListSizeHandler listSizeHandler = new ListSizeHandler((int)cacheParams.get("listSize"));
+        Object listResult = listSizeHandler.cut(result);
 
-        // "listSize"
+        // сохранение на диск или в оперативную память
+        if (cacheParams.get("cacheType") == CacheType.IN_MEMORY){
+            inMemoryResults.put(key, listResult);
 
-        // "zip"
+        } else{ // сохранение на диск
+            ZipDumpHandler zipDumpHandler = new ZipDumpHandler((boolean)cacheParams.get("zip"),
+                    (String)cacheParams.get("fileNamePrefix"), (String) cacheParams.get("rootFolder"));
+            zipDumpHandler.dump(result);
 
-        // "cacheType"
-
-        // "fileNamePrefix"
-        // "rootFolder"
-
-
-
-
-
-
-
-
-
-
-
+            // TODO: добавить ключ в словаь, но какой ????
+        }
     }
     // метод для извлечения рассчетов
     Object load(List<Object> key){
+        // как извлекать ???
 
 
 
