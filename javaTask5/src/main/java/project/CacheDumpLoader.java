@@ -18,13 +18,16 @@ class CacheDumpLoader {
 
     // метод для сохранения в словарь результатов расчета
     void dump(List<Object> key, HashMap<String, Object> cacheParams, Object result){
-        // TODO: Оставшиеся параметры использовать
+
         // "listSize"
-        // "fileNamePrefix"
-        // "cacheType"
+
         // "zip"
+
+        // "cacheType"
+
+        // "fileNamePrefix"
         // "rootFolder"
-        // TODO: Расположить в нужном порядке. Паттрен цепочка обязанностей
+
 
 
 

@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2730d67c-0dfd-4c06-b642-fb538be222d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/save_load_handlers/CacheTypeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/save_load_handlers/DiskDumpHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/save_load_handlers/ListSizeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/save_load_handlers/ZipHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
@@ -11,14 +15,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/AnnotationCacheHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/project/AnnotationCacheHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/CacheDumpLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/project/CacheDumpLoader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/CacheHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/project/CacheHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/CacheLoaderSaver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/project/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/CacheHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/CacheHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/cache_annotations/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/cache_annotations/Cache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/examples/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/examples/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/examples/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/examples/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -58,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/project/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="19" column="53" lean-forward="true" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+            <state relative-caret-position="285">
+              <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#461#462#0" expanded="true" />
@@ -81,13 +80,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/project/AnnotationCacheHandler.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="300">
+              <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#371#372#0" expanded="true" />
+                <element signature="e#415#416#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,6 +105,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Hand</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -118,7 +124,6 @@
         <option value="$PROJECT_DIR$/src/main/java/project/Cash.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/CacheType.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/AnnotationHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/project/CacheProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/Cache.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/Service.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/Calculator.java" />
@@ -134,10 +139,11 @@
         <option value="$PROJECT_DIR$/src/main/java/project/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/AnnotationCacheHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/CacheLoaderSaver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/cache_annotations/Cache.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/examples/Service.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/examples/Calculator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/project/CacheProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/project/CacheHandler.java" />
       </list>
     </option>
@@ -189,15 +195,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="javaTask5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="javaTask5" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="cache_annotations" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -237,8 +234,8 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="CacheHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="project.CacheHandler" />
+    <configuration name="CacheProxy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="project.CacheProxy" />
       <module name="javaTask5.main" />
       <extension name="coverage">
         <pattern>
@@ -265,7 +262,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CacheHandler" />
+        <item itemvalue="Application.CacheProxy" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -293,12 +290,12 @@
       <workItem from="1579940765466" duration="261000" />
       <workItem from="1579971861798" duration="83000" />
       <workItem from="1579972235694" duration="325000" />
-      <workItem from="1581530629939" duration="24822000" />
+      <workItem from="1581530629939" duration="26007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47282000" />
+    <option name="totallyTimeSpent" value="48467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="23" width="1627" height="1027" extended-state="6" />
@@ -312,9 +309,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.24064171" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.31016043" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.27700534" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.27700534" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -397,7 +394,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheProxy.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
@@ -469,6 +466,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/cache_annotations/Cache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/project/AnnotationCacheHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -479,42 +483,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/save_load_handlers/ListSizeHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#415#416#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/project/cache_annotations/Cache.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/save_load_handlers/ZipHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="30">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/save_load_handlers/CacheTypeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/save_load_handlers/DiskDumpHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/project/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="137" column="17" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheDumpLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="19" column="53" lean-forward="true" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+        <state relative-caret-position="285">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#461#462#0" expanded="true" />
             <element signature="e#511#512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/CacheHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
           </folding>
         </state>
       </provider>

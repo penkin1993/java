@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 class AnnotationCacheHandler {
-    static HashMap<String, Object>  validateStringLength(CacheHandler cacheHandler, Method method) throws Exception {
+    static HashMap<String, Object>  validateStringLength(CacheProxy cacheHandler, Method method) throws Exception {
         HashMap<String, Object> cacheParams = new HashMap<>();
 
         cacheParams.put("rootFolder", cacheHandler.rootFolder);

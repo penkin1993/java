@@ -6,17 +6,17 @@ import java.lang.reflect.Proxy;
 import java.util.*;
 
 
-public class CacheHandler implements InvocationHandler {
+public class CacheProxy implements InvocationHandler {
     private CacheDumpLoader cacheDumpLoader = new CacheDumpLoader();
     private Object delegate;
     String rootFolder;
 
-    public CacheHandler(String rootFolder) {
+    public CacheProxy(String rootFolder) {
         this.rootFolder = rootFolder;
     }
 
-    private CacheHandler(CacheHandler cacheHandler, Object delegate) {
-        this.rootFolder = cacheHandler.rootFolder;
+    private CacheProxy(CacheProxy cacheProxy, Object delegate) {
+        this.rootFolder = cacheProxy.rootFolder;
         this.delegate = delegate;
         this.cacheDumpLoader = new CacheDumpLoader();
     }
@@ -25,7 +25,7 @@ public class CacheHandler implements InvocationHandler {
         return (T) Proxy.newProxyInstance(
                 ClassLoader.getSystemClassLoader(),
                 service.getClass().getInterfaces(),
-                new CacheHandler(this, service)
+                new CacheProxy(this, service)
         );
     }
 
@@ -47,7 +47,6 @@ public class CacheHandler implements InvocationHandler {
             cacheDumpLoader.dump(key, cacheParams, result);
             return result;
         }
-
     }
 
     private List<Object> toKey(Method method, Object[] args) {
