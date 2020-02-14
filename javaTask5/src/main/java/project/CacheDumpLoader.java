@@ -10,10 +10,10 @@ import java.util.List;
 public class CacheDumpLoader {
 
     // Массив результатов. (Если все храниться в памяти)
-    public HashMap<List<Object>, Object> inMemoryResults = new HashMap<>();
+    private HashMap<List<Object>, Object> inMemoryResults = new HashMap<>();
 
     // Словарь для поиска результата  на диске
-    private HashMap<List<Object>, HashMap<String, Object>> onDiskResults = new HashMap<>(); // может можно упростить ???
+    private HashMap<List<Object>, Object> onDiskResults = new HashMap<>(); // может можно упростить ???
 
     // метод проверки наличия ключа
     boolean containsKey(List<Object> key){
@@ -35,7 +35,9 @@ public class CacheDumpLoader {
                     (String)cacheParams.get("fileNamePrefix"), (String) cacheParams.get("rootFolder"));
             zipDumpHandler.dump(result);
 
-            // TODO: добавить ключ в словаь, но какой ????
+            onDiskResults.put(key, new Object []{cacheParams.get("zip"),cacheParams.get("fileNamePrefix"),
+                    cacheParams.get("rootFolder")});
+
         }
     }
     // метод для извлечения рассчетов
