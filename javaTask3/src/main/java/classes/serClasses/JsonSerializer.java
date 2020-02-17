@@ -57,7 +57,7 @@ public class JsonSerializer implements SerClassInterface {
         serString.append("\n");
         span++;
 
-        Iterator iter = ((Collection) o).iterator();
+        Iterator<?> iter = ((Collection) o).iterator();
 
         while (iter.hasNext()) {
             serString.append(new String(new char[span]).replace("\0", "    "));

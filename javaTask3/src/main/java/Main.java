@@ -2,7 +2,7 @@ import java.lang.*;
 import java.util.ArrayList;
 
 import classes.serClasses.JsonSerializer;
-import classes.serClasses.SerClassType;
+import classes.serClasses.ReflectionSerializer;
 import classes.serClasses.XmlSerializer;
 
 
@@ -26,7 +26,7 @@ public class Main {
         person.phoneNumbers.add("China");
         person.phoneNumbers.add("USSR");
 
-        SerClassType ser = new SerClassType(new JsonSerializer());
+        ReflectionSerializer ser = new ReflectionSerializer(new JsonSerializer());
 
         System.out.print(ser.serialize(person));
 

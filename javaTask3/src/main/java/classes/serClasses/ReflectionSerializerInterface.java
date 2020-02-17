@@ -1,6 +1,6 @@
 package classes.serClasses;
 
-public interface SerClassInterface {
+public interface ReflectionSerializerInterface {
 
     void appendFrontName(StringBuilder serString, int span, Object o);
     void appendBackName(StringBuilder serString, int span, Object o);
