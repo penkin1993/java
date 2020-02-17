@@ -60,7 +60,7 @@ public class JsonSerializer implements SerializationStrategy {
         Iterator<?> iter = ((Collection) o).iterator();
 
         while (iter.hasNext()) {
-            serString.append(new String(new char[span]).replace("\0", "    "));
+            addSpan(serString, span);
             serString.append("\""); // имя открывающего аттрибута
             serString.append(iter.next());
             serString.append("\"");
@@ -70,9 +70,13 @@ public class JsonSerializer implements SerializationStrategy {
             serString.append("\n"); // имя закрывающего аттрибута
         }
         span--;
-        serString.append(new String(new char[span]).replace("\0", "    "));
+        addSpan(serString, span);
         serString.append("]");
         return serString.toString();
 
+    }
+
+    private void addSpan(StringBuilder serString, int span){
+        serString.append(new String(new char[span]).replace("\0", "    "));
     }
 }
