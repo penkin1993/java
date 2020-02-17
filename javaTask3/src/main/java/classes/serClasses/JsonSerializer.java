@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
-public class JsonSerializer implements SerClassInterface {
+public class JsonSerializer implements ReflectionSerializerInterface {
 
     public String appendFront(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();

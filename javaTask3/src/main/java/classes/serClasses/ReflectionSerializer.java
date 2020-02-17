@@ -13,7 +13,7 @@ public class ReflectionSerializer implements Serializer {
         this.serObj = serObj;
     }
 
-    public String run(int span, Object o) {
+    public String run(int span, Object o) throws IllegalAccessException {
         StringBuilder serString = new StringBuilder();
         if (PrimitiveCheck.isWrapperType(o.getClass())) { // примитив
             return serString.append(serObj.primitiveHandler(o)).toString();
@@ -31,9 +31,8 @@ public class ReflectionSerializer implements Serializer {
                 serString.append(serObj.appendFront(span, declaredField.getName(), false)); // имя открывающего аттрибута
                 serString.append(run(span, declaredField.get(o)));
                 serString.append(serObj.appendBack(span, declaredField.getName(), false)); // имя закрывающего аттрибута
-
-            } catch (IllegalAccessException e) {
-                System.out.println("IllegalAccessException");
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("IllegalArgumentException");
             }
         }
         span--;
@@ -42,7 +41,7 @@ public class ReflectionSerializer implements Serializer {
 
     }
 
-    public String serialize(Object o) {
+    public String serialize(Object o) throws IllegalAccessException{
         return run(0, o);
     }
 }

@@ -20,7 +20,7 @@ class Person {
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         Person person = new Person();
         person.phoneNumbers.add("Russia");
         person.phoneNumbers.add("China");

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
-public class XmlSerializer implements SerClassInterface {
+public class XmlSerializer implements ReflectionSerializerInterface {
 
     public String appendFront(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();
