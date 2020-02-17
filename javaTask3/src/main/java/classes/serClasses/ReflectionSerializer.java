@@ -7,9 +7,9 @@ import java.util.Collection;
 
 
 public class ReflectionSerializer implements Serializer {
-    private final ReflectionSerializerInterface serObj;
+    private final SerializationStrategy serObj;
 
-    public ReflectionSerializer(ReflectionSerializerInterface serObj) {
+    public ReflectionSerializer(SerializationStrategy serObj) {
         this.serObj = serObj;
     }
 

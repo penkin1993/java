@@ -3,17 +3,14 @@ package classes.serClasses;
 import java.util.*;
 
 
-class PrimitiveCheck
-{
+class PrimitiveCheck {
     private static final Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
 
-    static boolean isWrapperType(Class<?> clazz)
-    {
+    static boolean isWrapperType(Class<?> clazz) {
         return WRAPPER_TYPES.contains(clazz);
     }
 
-    private static Set<Class<?>> getWrapperTypes()
-    {
+    private static Set<Class<?>> getWrapperTypes() {
         Set<Class<?>> ret = new HashSet<>();
         ret.add(Boolean.class);
         ret.add(Character.class);
