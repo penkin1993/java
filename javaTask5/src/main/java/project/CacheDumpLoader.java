@@ -45,7 +45,7 @@ class CacheDumpLoader {
         }
     }
     // метод для извлечения рассчетов
-    Object load(List<Object> key) {
+    Object load(List<Object> key) throws IOException, ClassNotFoundException{
         if (inMemoryResults.containsKey(key)) {
             return inMemoryResults.get(key);
 
