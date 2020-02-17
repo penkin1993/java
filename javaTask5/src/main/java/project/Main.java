@@ -7,9 +7,9 @@ import project.examples.ServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        CacheProxy cacheHandler = new CacheProxy("./");
+        CacheProxy cacheHandler = new CacheProxy("./src/test/resources/");
 
-        Service serviceImpl = cacheHandler.cache(new ServiceImpl()); // TODO: Работает не так ???!!!
+        Service serviceImpl = cacheHandler.cache(new ServiceImpl());
         System.out.println(serviceImpl.work("World1"));
         System.out.println(serviceImpl.work("World2"));
         System.out.println(serviceImpl.work("World3"));

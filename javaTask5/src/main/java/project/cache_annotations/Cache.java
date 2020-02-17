@@ -13,7 +13,7 @@ public @interface Cache {
 
     String fileNamePrefix() default "__None__";
 
-    boolean zip() default false;
+    boolean zip() default true;
 
     Class[] identityBy() default {String.class, double.class};
 
