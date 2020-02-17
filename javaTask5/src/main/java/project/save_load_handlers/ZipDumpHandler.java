@@ -17,7 +17,7 @@ public class ZipDumpHandler {
 
     public void dump(Object object) throws IOException {
         ObjectOutputStream out;
-        String pathFile = this.rootFolder + this.fileNamePrefix; // TODO: Использовать этот путь !!!
+        String pathFile = this.rootFolder + this.fileNamePrefix;
         if (this.isZip) {
             out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(new File(pathFile))));
             out.writeObject(object);

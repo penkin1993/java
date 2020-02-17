@@ -7,7 +7,7 @@ import project.examples.ServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        CacheProxy cacheHandler = new CacheProxy("./src/test/resources/");
+        CacheProxy cacheHandler = new CacheProxy("./src/main/resources/");
 
         Service serviceImpl = cacheHandler.cache(new ServiceImpl());
         System.out.println(serviceImpl.work("World1"));
