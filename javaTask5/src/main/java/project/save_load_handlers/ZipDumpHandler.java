@@ -2,6 +2,7 @@ package project.save_load_handlers;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class ZipDumpHandler {
     private boolean isZip;
@@ -15,18 +16,18 @@ public class ZipDumpHandler {
     }
 
     public void dump(Object object) throws IOException {
-        // TODO: Добавить полный путь
+        ObjectOutputStream out;
+        String pathFile = this.rootFolder + this.fileNamePrefix; // TODO: Использовать этот путь !!!
         if (this.isZip) {
+            out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(new File(pathFile))));
+            out.writeObject(object);
+            out.flush();
 
         } else {
-            String filename = this.fileNamePrefix;
-            FileOutputStream file = new FileOutputStream(filename);
-            ObjectOutputStream out = new ObjectOutputStream(file);
+            out = new ObjectOutputStream(new FileOutputStream(pathFile));
             out.writeObject(object);
-            out.close();
-            file.close();
         }
-
+        out.close();
     }
 
     public Object load() throws IOException, ClassNotFoundException {
