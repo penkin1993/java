@@ -21,8 +21,14 @@ public class ReflectionSerializer implements Serializer {
             return serString.append(serObj.collectionHandler(span, o)).toString();
         }
         serObj.appendFrontName(serString, span, o.getClass().getName());
-        span++;
+        span = appendForwardBack(o, serString, span);
+        serObj.appendBackName(serString, span, o.getClass().getName());
+        return serString.toString();
 
+    }
+
+    private int appendForwardBack(Object o, StringBuilder serString, int span) throws IllegalAccessException {
+        span++;
         Class<?> clazz = o.getClass();
         Field[] declafedFields = clazz.getDeclaredFields();
         for (Field declaredField : declafedFields) {
@@ -36,12 +42,11 @@ public class ReflectionSerializer implements Serializer {
             }
         }
         span--;
-        serObj.appendBackName(serString, span, o.getClass().getName());
-        return serString.toString();
-
+        return span;
     }
 
-    public String serialize(Object o) throws IllegalAccessException{
+
+    public String serialize(Object o) throws IllegalAccessException {
         return run(0, o);
     }
 }
