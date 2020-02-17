@@ -50,5 +50,3 @@ public class ReflectionSerializer implements Serializer {
         return run(0, o);
     }
 }
-
-

@@ -76,7 +76,7 @@ public class JsonSerializer implements SerializationStrategy {
 
     }
 
-    private void addSpan(StringBuilder serString, int span){
+    private void addSpan(StringBuilder serString, int span) {
         serString.append(new String(new char[span]).replace("\0", "    "));
     }
 }

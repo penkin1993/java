@@ -65,7 +65,6 @@ public class XmlSerializer implements SerializationStrategy {
         span--;
         serString.append(new String(new char[span]).replace("\0", "    "));
         return serString.toString();
-
     }
 }
 
