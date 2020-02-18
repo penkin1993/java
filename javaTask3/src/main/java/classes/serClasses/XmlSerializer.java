@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
-public class XmlSerializer implements SerClassInterface {
+public class XmlSerializer implements SerializationStrategy {
 
     public String appendFront(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();
@@ -36,11 +36,11 @@ public class XmlSerializer implements SerClassInterface {
         return string.toString();
     }
 
-    public void appendFrontName(StringBuilder serStringint, int span, Object o){
+    public void appendFrontName(StringBuilder serStringint, int span, Object o) {
         serStringint.append(appendFront(span, o.toString(), true));
     }
 
-    public void appendBackName(StringBuilder serStringint, int span, Object o){
+    public void appendBackName(StringBuilder serStringint, int span, Object o) {
         serStringint.append(appendBack(span, o.toString(), true));
     }
 
@@ -65,7 +65,6 @@ public class XmlSerializer implements SerClassInterface {
         span--;
         serString.append(new String(new char[span]).replace("\0", "    "));
         return serString.toString();
-
     }
 }
 

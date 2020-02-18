@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
-public class JsonSerializer implements SerClassInterface {
+public class JsonSerializer implements SerializationStrategy {
 
     public String appendFront(int span, String name, boolean newRow) {
         StringBuilder string = new StringBuilder();
@@ -57,10 +57,10 @@ public class JsonSerializer implements SerClassInterface {
         serString.append("\n");
         span++;
 
-        Iterator iter = ((Collection) o).iterator();
+        Iterator<?> iter = ((Collection) o).iterator();
 
         while (iter.hasNext()) {
-            serString.append(new String(new char[span]).replace("\0", "    "));
+            addSpan(serString, span);
             serString.append("\""); // имя открывающего аттрибута
             serString.append(iter.next());
             serString.append("\"");
@@ -70,9 +70,13 @@ public class JsonSerializer implements SerClassInterface {
             serString.append("\n"); // имя закрывающего аттрибута
         }
         span--;
-        serString.append(new String(new char[span]).replace("\0", "    "));
+        addSpan(serString, span);
         serString.append("]");
         return serString.toString();
 
+    }
+
+    private void addSpan(StringBuilder serString, int span) {
+        serString.append(new String(new char[span]).replace("\0", "    "));
     }
 }

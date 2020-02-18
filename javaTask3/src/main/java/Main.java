@@ -2,7 +2,7 @@ import java.lang.*;
 import java.util.ArrayList;
 
 import classes.serClasses.JsonSerializer;
-import classes.serClasses.SerClassType;
+import classes.serClasses.ReflectionSerializer;
 import classes.serClasses.XmlSerializer;
 
 
@@ -20,19 +20,15 @@ class Person {
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         Person person = new Person();
         person.phoneNumbers.add("Russia");
         person.phoneNumbers.add("China");
         person.phoneNumbers.add("USSR");
 
-        SerClassType ser = new SerClassType(new JsonSerializer());
+        ReflectionSerializer ser = new ReflectionSerializer(new JsonSerializer());
 
         System.out.print(ser.serialize(person));
 
     }
 }
-
-
-
-
